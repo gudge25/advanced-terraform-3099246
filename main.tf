@@ -1,6 +1,6 @@
 ### PROVIDER
 provider "google" {
-  project = "advancedterraform" #replace this with your project-id
+  project = "testproject-430218" #replace this with your project-id
   region  = "us-central1"
   zone    = "us-central1-a"
 }
@@ -38,8 +38,14 @@ resource "google_compute_firewall" "default" {
 ### COMPUTE
 ## NGINX PROXY
 resource "google_compute_instance" "nginx_instance" {
+  scheduling {
+    provisioning_model = "SPOT"
+    preemptible = true
+    automatic_restart = false
+  }
+  
   name         = "nginx-proxy"
-  machine_type = "f1-micro"
+  machine_type = "e2-micro"
   tags = ["web"]
   
   boot_disk {
@@ -59,8 +65,13 @@ resource "google_compute_instance" "nginx_instance" {
 
 ## WEB1
 resource "google_compute_instance" "web1" {
+  scheduling {
+    provisioning_model = "SPOT"
+    preemptible = true
+    automatic_restart = false
+  }
   name         = "web1"
-  machine_type = "f1-micro"
+  machine_type = "e2-micro"
   
   boot_disk {
     initialize_params {
@@ -76,8 +87,13 @@ resource "google_compute_instance" "web1" {
 }
 ## WEB2
 resource "google_compute_instance" "web2" {
+  scheduling {
+    provisioning_model = "SPOT"
+    preemptible = true
+    automatic_restart = false
+  }
   name         = "web2"
-  machine_type = "f1-micro"
+  machine_type = "e2-micro"
   
   boot_disk {
     initialize_params {
@@ -92,8 +108,13 @@ resource "google_compute_instance" "web2" {
 }
 ## WEB3
 resource "google_compute_instance" "web3" {
+  scheduling {
+    provisioning_model = "SPOT"
+    preemptible = true
+    automatic_restart = false
+  }
   name         = "web3"
-  machine_type = "f1-micro"
+  machine_type = "e2-micro"
   
   boot_disk {
     initialize_params {
@@ -109,8 +130,13 @@ resource "google_compute_instance" "web3" {
 
 ## DB
 resource "google_compute_instance" "mysqldb" {
+  scheduling {
+    provisioning_model = "SPOT"
+    preemptible = true
+    automatic_restart = false
+  }
   name         = "mysqldb"
-  machine_type = "f1-micro"
+  machine_type = "e2-micro"
   
   boot_disk {
     initialize_params {
